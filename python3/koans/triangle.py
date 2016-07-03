@@ -17,13 +17,18 @@
 #   about_triangle_project_2.py
 #
 def triangle(a, b, c):
-    if a == b and b == c:
-    	return 'equilateral';
-    elif (a == b and a != c) or (b == c and b != a) or (c == a and c != b):
-    	return 'isosceles'
-    else:
-    	return 'scalene'
+	if any(t < 1 for t in (a,b,c)):
+		raise TriangleError()
+	x,y,z = sorted([a,b,c])
+	if x + y <=z:
+		raise TriangleError()
+	if a == b and b == c:
+		return 'equilateral';
+	elif (a == b and a != c) or (b == c and b != a) or (c == a and c != b):
+		return 'isosceles'
+	else:
+		return 'scalene'
 
 # Error class used in part 2.  No need to change this code.
 class TriangleError(Exception):
-    pass
+	pass
